@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Win Friends &amp; Influence People — Interactive Summary</title>
+<style>
+  :root{
+    --bg:#faf7f2; --card:#ffffff; --ink:#2b2420; --muted:#7a6f66;
+    --accent:#c0532b; --accent2:#1d6a5a; --gold:#b8860b; --line:#e8e0d6;
+    --chip:#f3ece2; --good:#1d6a5a; --bad:#b03a2e;
+    --shadow:0 2px 10px rgba(60,40,20,.08);
+  }
+  [data-theme="dark"]{
+    --bg:#1d1a17; --card:#28241f; --ink:#ece5dc; --muted:#a79b8e;
+    --accent:#e8794f; --accent2:#4fb39c; --gold:#d9a93f; --line:#3a342d;
+    --chip:#332d26; --shadow:0 2px 10px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:Georgia,'Times New Roman',serif; background:var(--bg); color:var(--ink); line-height:1.6; transition:background .3s,color .3s;}
+  .wrap{max-width:1000px; margin:0 auto; padding:24px 16px 80px;}
+  header.hero{text-align:center; padding:40px 16px 24px;}
+  .hero .era{letter-spacing:.25em; text-transform:uppercase; font-size:.75rem; color:var(--gold); font-family:Verdana,sans-serif;}
+  .hero h1{font-size:clamp(1.6rem,4vw,2.6rem); margin:.4em 0 .2em;}
+  .hero .by{color:var(--muted); font-style:italic;}
+  .hero .meta{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:18px; font-family:Verdana,sans-serif; font-size:.78rem;}
+  .pill{background:var(--chip); border:1px solid var(--line); border-radius:999px; padding:6px 14px;}
+  .pill b{color:var(--accent);}
+  #themeBtn{position:fixed; top:14px; right:14px; z-index:50; background:var(--card); border:1px solid var(--line); border-radius:999px; padding:8px 14px; cursor:pointer; font-size:1rem; box-shadow:var(--shadow);}
+  nav.tabs{position:sticky; top:0; z-index:40; display:flex; gap:6px; overflow-x:auto; background:var(--bg); padding:10px 0; border-bottom:2px solid var(--line); font-family:Verdana,sans-serif;}
+  nav.tabs button{flex:0 0 auto; border:1px solid var(--line); background:var(--card); color:var(--ink); border-radius:999px; padding:9px 16px; font-size:.82rem; cursor:pointer; transition:all .2s;}
+  nav.tabs button:hover{border-color:var(--accent);}
+  nav.tabs button.active{background:var(--accent); color:#fff; border-color:var(--accent);}
+  section.panel{display:none; animation:fade .35s ease;}
+  section.panel.show{display:block;}
+  @keyframes fade{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
+  h2.sec{font-size:1.5rem; margin:28px 0 6px; color:var(--accent);}
+  .sub{color:var(--muted); margin-bottom:18px;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 22px; margin:14px 0; box-shadow:var(--shadow);}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px;}
+  table{width:100%; border-collapse:collapse; margin:10px 0 4px; font-size:.95rem;}
+  th{background:var(--chip); text-align:left; padding:10px 12px; font-family:Verdana,sans-serif; font-size:.75rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); border-bottom:2px solid var(--line);}
+  td{padding:11px 12px; border-bottom:1px solid var(--line); vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  td.num{font-family:Verdana,sans-serif; font-weight:bold; color:var(--accent); white-space:nowrap;}
+  .partTag{display:inline-block; font-family:Verdana,sans-serif; font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; background:var(--accent2); color:#fff; border-radius:6px; padding:4px 10px; margin-bottom:6px;}
+  details.prin{border:1px solid var(--line); border-radius:10px; margin:8px 0; background:var(--card); overflow:hidden;}
+  details.prin summary{cursor:pointer; padding:12px 16px; font-weight:bold; list-style:none; display:flex; gap:10px; align-items:baseline;}
+  details.prin summary::-webkit-details-marker{display:none;}
+  details.prin summary .n{color:var(--accent); font-family:Verdana,sans-serif;}
+  details.prin[open] summary{border-bottom:1px dashed var(--line);}
+  details.prin .body{padding:12px 16px 16px; font-size:.95rem;}
+  blockquote{border-left:4px solid var(--gold); padding:8px 16px; margin:12px 0; font-style:italic; color:var(--muted);}
+  ul.clean{margin:8px 0 8px 20px;}
+  ul.clean li{margin:6px 0;}
+  .kicker{font-family:Verdana,sans-serif; font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:var(--gold);}
+  /* quiz */
+  .q{margin:18px 0; padding:16px 18px; border:1px solid var(--line); border-radius:12px; background:var(--card);}
+  .q h4{margin-bottom:10px;}
+  .opt{display:block; width:100%; text-align:left; margin:6px 0; padding:10px 14px; border:1px solid var(--line); border-radius:9px; background:var(--chip); color:var(--ink); cursor:pointer; font-family:inherit; font-size:.93rem; transition:all .15s;}
+  .opt:hover{border-color:var(--accent);}
+  .opt.correct{background:var(--good); color:#fff; border-color:var(--good);}
+  .opt.wrong{background:var(--bad); color:#fff; border-color:var(--bad);}
+  .opt:disabled{cursor:default; opacity:.85;}
+  .explain{display:none; margin-top:10px; font-size:.88rem; color:var(--muted); border-top:1px dashed var(--line); padding-top:8px;}
+  .q.answered .explain{display:block;}
+  .bigbtn{background:var(--accent); color:#fff; border:none; border-radius:999px; padding:12px 26px; font-size:1rem; cursor:pointer; font-family:Verdana,sans-serif; box-shadow:var(--shadow);}
+  .bigbtn:hover{opacity:.9;}
+  #scoreBox{text-align:center; padding:26px;}
+  #scoreBox .big{font-size:2.6rem; font-weight:bold; color:var(--accent);}
+  .bar{height:10px; background:var(--chip); border-radius:999px; overflow:hidden; margin:14px auto; max-width:420px;}
+  .bar i{display:block; height:100%; background:linear-gradient(90deg,var(--accent),var(--gold)); width:0%; transition:width .8s ease;}
+  .badge{display:inline-block; margin-top:8px; padding:6px 16px; border-radius:999px; background:var(--chip); border:1px solid var(--line); font-family:Verdana,sans-serif; font-size:.85rem;}
+  footer{text-align:center; color:var(--muted); font-size:.8rem; margin-top:50px; font-family:Verdana,sans-serif;}
+  .progressQuiz{font-family:Verdana,sans-serif; font-size:.8rem; color:var(--muted); text-align:center; margin:8px 0;}
+  @media(max-width:640px){ td,th{padding:8px;} .wrap{padding:16px 10px 60px;} }
+</style>
+</head>
+<body>
+<button id="themeBtn" title="Toggle dark mode">🌙</button>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="era">A Classic Since 1936 · 30+ Million Copies</div>
+    <h1>How to Win Friends &amp; Influence People</h1>
+    <div class="by">by Dale Carnegie — an interactive field guide</div>
+    <div class="meta">
+      <span class="pill">📖 4 Parts</span>
+      <span class="pill">🧭 <b>30</b> Principles</span>
+      <span class="pill">👀 Views: <b id="viewCount">—</b></span>
+      <span class="pill">🧠 Quiz inside</span>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button data-t="overview" class="active">🏠 Overview</button>
+    <button data-t="principles">📜 The 30 Principles</button>
+    <button data-t="takeaways">💡 Key Takeaways</button>
+    <button data-t="investor">📈 Investor Lessons</button>
+    <button data-t="actions">✅ Action Plan</button>
+    <button data-t="quiz">🎯 Mastery Quiz</button>
+  </nav>
+
+  <!-- ================= OVERVIEW ================= -->
+  <section class="panel show" id="p-overview">
+    <h2 class="sec">The Big Idea</h2>
+    <p class="sub">One sentence: <em>People are creatures of emotion, not logic — make them feel important, sincerely, and they will move mountains for you.</em></p>
+
+    <div class="card">
+      <span class="kicker">Why this book endures</span>
+      <p style="margin-top:8px">Carnegie's core discovery: dealing with people is probably the biggest problem you face, and technical skill accounts for only a fraction of professional success — the rest is human engineering: personality and the ability to lead people. The book is not about manipulation; every technique fails unless it comes from <strong>genuine interest in the other person</strong>. Flattery is counterfeit; sincere appreciation is the currency.</p>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <span class="kicker">The 4 Parts</span>
+        <table>
+          <tr><td class="num">I</td><td><b>Fundamental techniques in handling people</b> — the 3 bedrock rules (3 principles)</td></tr>
+          <tr><td class="num">II</td><td><b>Six ways to make people like you</b> (6 principles)</td></tr>
+          <tr><td class="num">III</td><td><b>How to win people to your way of thinking</b> (12 principles)</td></tr>
+          <tr><td class="num">IV</td><td><b>Be a leader: change people without arousing resentment</b> (9 principles)</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <span class="kicker">The 3 Master Themes</span>
+        <ul class="clean">
+          <li><b>Never attack the ego.</b> Criticism puts people on the defensive and breeds resentment — it never changes behavior for long.</li>
+          <li><b>Feed the hunger to feel important.</b> The deepest human craving (per William James: "the craving to be appreciated").</li>
+          <li><b>See through their eyes.</b> Talk in terms of the other person's interests and wants, not your own.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="kicker">Famous lines worth remembering (paraphrased ideas)</span>
+      <ul class="clean">
+        <li>When dealing with people, remember you are dealing with creatures of emotion, bristling with prejudice, motivated by pride and vanity.</li>
+        <li>You can make more friends in two months by becoming interested in other people than in two years trying to get people interested in you.</li>
+        <li>A person's name is, to that person, the sweetest sound in any language.</li>
+        <li>The only way to get the best of an argument is to avoid it.</li>
+        <li>Arouse in the other person an eager want — he who can do this has the whole world with him.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= PRINCIPLES ================= -->
+  <section class="panel" id="p-principles">
+    <h2 class="sec">All 30 Principles, Organized</h2>
+    <p class="sub">Tap any principle to expand the essence + how to apply it.</p>
+
+    <div class="card">
+      <span class="partTag">Part I · Handling People</span>
+      <details class="prin"><summary><span class="n">1</span> Don't criticize, condemn, or complain</summary><div class="body">Criticism is futile — it puts people on the defensive and wounds pride. Even criminals justify themselves ("Two Gun" Crowley thought himself kind-hearted). Lincoln learned to never post the harsh letter. <b>Apply:</b> before correcting anyone, ask what you'd do in their shoes. Understanding beats condemning.</div></details>
+      <details class="prin"><summary><span class="n">2</span> Give honest and sincere appreciation</summary><div class="body">The deepest urge in human nature is the desire to be important. Charles Schwab's secret: "I am hearty in my approbation and lavish in my praise." Appreciation is sincere; flattery is counterfeit and fools few. <b>Apply:</b> find something you honestly admire, and say it specifically.</div></details>
+      <details class="prin"><summary><span class="n">3</span> Arouse in the other person an eager want</summary><div class="body">Fishing analogy: bait the hook with what the <em>fish</em> likes (worms, not strawberries and cream). Henry Ford: success hinges on the ability to see things from the other person's angle as well as your own. <b>Apply:</b> before asking for anything, ask "How can I make them <em>want</em> to do this?"</div></details>
+    </div>
+
+    <div class="card">
+      <span class="partTag">Part II · Make People Like You</span>
+      <details class="prin"><summary><span class="n">4</span> Become genuinely interested in other people</summary><div class="body">Dogs make a living on pure affection. You'll make more friends in two months by being interested in others than in two years trying to make them interested in you. <b>Apply:</b> greet people with animation; remember birthdays; do things for others that take time and thought.</div></details>
+      <details class="prin"><summary><span class="n">5</span> Smile</summary><div class="body">Actions speak louder than words; a smile says "I like you, you make me happy." It must be real — an insincere grin fools nobody. Even on the phone, a smile comes through in your voice. <b>Apply:</b> act happy and you tend to feel it; force a smile before hard conversations.</div></details>
+      <details class="prin"><summary><span class="n">6</span> Remember that a person's name is the sweetest sound</summary><div class="body">Jim Farley could call 50,000 people by first name — it helped put FDR in the White House. Forgetting or misspelling a name is a subtle insult. <b>Apply:</b> repeat the name on meeting, associate it with something, write it down afterwards.</div></details>
+      <details class="prin"><summary><span class="n">7</span> Be a good listener; encourage others to talk about themselves</summary><div class="body">The distracted-botanist dinner story: Carnegie barely spoke, listened intently, and was called "a most interesting conversationalist." Exclusive attention is one of the highest compliments. <b>Apply:</b> ask questions others enjoy answering; never interrupt; listen to complaints fully before responding.</div></details>
+      <details class="prin"><summary><span class="n">8</span> Talk in terms of the other person's interests</summary><div class="body">Roosevelt prepped for every guest by studying their favorite subject the night before. The royal road to a person's heart is to talk about the things they treasure most. <b>Apply:</b> research what the other person cares about before every important meeting.</div></details>
+      <details class="prin"><summary><span class="n">9</span> Make the other person feel important — and do it sincerely</summary><div class="body">The golden rule of the book: "Do unto others as you would have others do unto you." Little phrases — "I'm sorry to trouble you," "Would you be so kind" — oil the gears of daily life. <b>Apply:</b> acknowledge people's unsung strengths; admit they may be superior to you in their own domain.</div></details>
+    </div>
+
+    <div class="card">
+      <span class="partTag">Part III · Win People to Your Way of Thinking</span>
+      <details class="prin"><summary><span class="n">10</span> The only way to get the best of an argument is to avoid it</summary><div class="body">Win an argument and you lose the goodwill; a man convinced against his will is of the same opinion still. Nine times out of ten an argument ends with each party more convinced they're right. <b>Apply:</b> welcome disagreement, distrust your defensive instinct, look for areas of agreement, postpone action to think it through.</div></details>
+      <details class="prin"><summary><span class="n">11</span> Show respect for others' opinions; never say "You're wrong"</summary><div class="body">Telling someone they're wrong strikes a blow at their intelligence, pride, and self-respect — they'll want to strike back, not change their mind. <b>Apply:</b> begin with "I may be wrong. I frequently am. Let's examine the facts."</div></details>
+      <details class="prin"><summary><span class="n">12</span> If you are wrong, admit it quickly and emphatically</summary><div class="body">Say about yourself the critical things the other person is thinking before they can say them — their wind leaves their sails and they often defend <em>you</em>. "By fighting you never get enough, but by yielding you get more than you expected." <b>Apply:</b> own mistakes fast, fully, even cheerfully.</div></details>
+      <details class="prin"><summary><span class="n">13</span> Begin in a friendly way</summary><div class="body">Lincoln: "A drop of honey catches more flies than a gallon of gall." Rockefeller defused a violent strike with friendliness and praise. Gentleness and friendliness outmuscle fury. <b>Apply:</b> open hard conversations warmly, never with the grievance.</div></details>
+      <details class="prin"><summary><span class="n">14</span> Get the other person saying "yes, yes" immediately</summary><div class="body">The Socratic method: start with questions on which you agree. Each "yes" builds psychological momentum; a "No" is the hardest handicap to overcome. <b>Apply:</b> structure proposals so the first several points are undeniable.</div></details>
+      <details class="prin"><summary><span class="n">15</span> Let the other person do a great deal of the talking</summary><div class="body">People won't pay attention to you while they still have ideas of their own to express. Even friends prefer talking about their achievements to hearing about yours. <b>Apply:</b> ask questions, then be quiet — let them talk themselves into your position.</div></details>
+      <details class="prin"><summary><span class="n">16</span> Let the other person feel the idea is theirs</summary><div class="body">No one likes being sold or ordered; everyone prefers acting on their own ideas. Make suggestions and let others reach the conclusion. (Lao-tse: the sea masters streams by staying below them.) <b>Apply:</b> plant seeds; ask "what do you think about…?" and credit the result to them.</div></details>
+      <details class="prin"><summary><span class="n">17</span> Try honestly to see things from the other person's point of view</summary><div class="body">Other people may be totally wrong — but they don't think so. Any fool can condemn; it takes character to understand <em>why</em> they think and act as they do. Their reason is the key. <b>Apply:</b> before any meeting, rehearse what you'd want if you were them.</div></details>
+      <details class="prin"><summary><span class="n">18</span> Be sympathetic with the other person's ideas and desires</summary><div class="body">The magic phrase: "I don't blame you one iota for feeling as you do. If I were you I would undoubtedly feel the same." (True — in their shoes, with their temperament and experience, you would.) Three-fourths of the people you meet are starving for sympathy. <b>Apply:</b> lead with empathy before logic.</div></details>
+      <details class="prin"><summary><span class="n">19</span> Appeal to the nobler motives</summary><div class="body">People have two reasons for what they do: the real one and the one that sounds good. Appeal to the fine motive — honesty, fairness, being a good parent — and most people will live up to it. <b>Apply:</b> frame requests around the person's best self-image.</div></details>
+      <details class="prin"><summary><span class="n">20</span> Dramatize your ideas</summary><div class="body">This is the age of showmanship: truth isn't enough — make it vivid, interesting, dramatic. (The cash-register salesman who threw coins on the floor: "you're literally throwing money away.") <b>Apply:</b> turn abstract claims into demonstrations, stories, and visuals.</div></details>
+      <details class="prin"><summary><span class="n">21</span> Throw down a challenge</summary><div class="body">When nothing else works, stimulate competition — not for money, but the desire to excel. Schwab's chalk "6" on the factory floor turned shifts into rivals and output soared. The work itself — the chance to prove one's worth — is the great motivator. <b>Apply:</b> gamify goals; give people a score to beat.</div></details>
+    </div>
+
+    <div class="card">
+      <span class="partTag">Part IV · Be a Leader (Change People Without Resentment)</span>
+      <details class="prin"><summary><span class="n">22</span> Begin with praise and honest appreciation</summary><div class="body">It's easier to hear unpleasant things after praise — the barber lathers before he shaves. Coolidge to his secretary: praised her dress, then suggested care with punctuation. <b>Apply:</b> open corrective talks with specific, sincere praise.</div></details>
+      <details class="prin"><summary><span class="n">23</span> Call attention to mistakes indirectly</summary><div class="body">Beware the word "but" — it makes the praise feel like a setup. Change "but" to "and": "Your grades are up, <em>and</em> if you keep it up algebra will rise too." Indirect hints work wonders with sensitive people. <b>Apply:</b> model the right behavior or ask a question instead of pointing the finger.</div></details>
+      <details class="prin"><summary><span class="n">24</span> Talk about your own mistakes before criticizing</summary><div class="body">Humility first: "I've made worse mistakes than this at your age…" makes the medicine easier to swallow. <b>Apply:</b> preface feedback with your own comparable stumble — sincerely.</div></details>
+      <details class="prin"><summary><span class="n">25</span> Ask questions instead of giving direct orders</summary><div class="body">"You might consider this…" / "Do you think that would work?" Questions preserve pride, spark creativity, and make people own the fix. Nobody likes taking orders. <b>Apply:</b> convert every command into a question for a week.</div></details>
+      <details class="prin"><summary><span class="n">26</span> Let the other person save face</summary><div class="body">We ride roughshod over feelings, criticizing in front of others, never considering the hurt to pride. Even if we're right, destroying someone's dignity destroys their cooperation. "I have no right to say or do anything that diminishes a man in his own eyes." <b>Apply:</b> criticize in private; give the demoted a dignified exit story.</div></details>
+      <details class="prin"><summary><span class="n">27</span> Praise the slightest improvement and praise every improvement</summary><div class="body">Be "hearty in your approbation and lavish in your praise." Praise is sunlight to the human spirit; abilities wither under criticism and blossom under encouragement. Make praise specific — then it lands as sincere. <b>Apply:</b> catch people doing something right, daily.</div></details>
+      <details class="prin"><summary><span class="n">28</span> Give the other person a fine reputation to live up to</summary><div class="body">If you want someone to improve, act as though the trait were already one of their outstanding qualities. "Assume a virtue, if you have it not" (Shakespeare). People try to live up to the reputation you give them. <b>Apply:</b> publicly label people by their best quality.</div></details>
+      <details class="prin"><summary><span class="n">29</span> Use encouragement; make the fault seem easy to correct</summary><div class="body">Tell someone they're stupid at a thing and you destroy every incentive to improve. Say the fault is easily corrected and the talent is latent — they'll practice until dawn. <b>Apply:</b> frame gaps as small and closable.</div></details>
+      <details class="prin"><summary><span class="n">30</span> Make the other person happy about doing the thing you suggest</summary><div class="body">The final principle: attach benefits, titles, and authority to the request; be empathetic, know what you want, and frame it in terms of <em>their</em> gain. Napoleon handed out ribbons; titles and perceived importance change behavior. <b>Apply:</b> every ask should answer "what's in it for them?"</div></details>
+    </div>
+  </section>
+
+  <!-- ================= TAKEAWAYS ================= -->
+  <section class="panel" id="p-takeaways">
+    <h2 class="sec">Key Takeaways &amp; Points to Remember</h2>
+    <p class="sub">The whole book, compressed into one reference table.</p>
+
+    <div class="card">
+      <table>
+        <tr><th>Theme</th><th>The Rule</th><th>Why It Works</th><th>One-Line Memory Hook</th></tr>
+        <tr><td><b>Criticism</b></td><td>Never criticize, condemn, or complain</td><td>People are emotional; criticism triggers defense, not change</td><td>"Honey, not gall"</td></tr>
+        <tr><td><b>Appreciation</b></td><td>Give sincere, specific appreciation — never flattery</td><td>Feeling important is the deepest human hunger</td><td>"Hearty approbation, lavish praise"</td></tr>
+        <tr><td><b>Motivation</b></td><td>Talk about what <em>they</em> want</td><td>People act for their reasons, not yours</td><td>"Bait the hook to suit the fish"</td></tr>
+        <tr><td><b>Likability</b></td><td>Interest, smile, name, listen, their interests, make them feel important</td><td>Attention is the highest compliment</td><td>"Be interested, not interesting"</td></tr>
+        <tr><td><b>Persuasion</b></td><td>Avoid arguments; never say "you're wrong"; get yeses; let them talk; let the idea be theirs</td><td>A person convinced against their will is of the same opinion still</td><td>"You can't win an argument"</td></tr>
+        <tr><td><b>Conflict</b></td><td>Admit your own faults fast; begin friendly; see their viewpoint; sympathize</td><td>Yielding disarms; empathy opens ears</td><td>"Admit it before they say it"</td></tr>
+        <tr><td><b>Influence</b></td><td>Appeal to noble motives; dramatize; throw down a challenge</td><td>People live up to the fine motive and love to excel</td><td>"The real reason vs. the good-sounding one"</td></tr>
+        <tr><td><b>Leadership</b></td><td>Praise first, criticize indirectly, own your mistakes, ask don't order, save face, praise progress, give a reputation, encourage, make them happy to comply</td><td>Change sticks only when pride stays intact</td><td>"Lather before you shave"</td></tr>
+      </table>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <span class="kicker">⚠️ Common Misreadings</span>
+        <ul class="clean">
+          <li><b>It's not manipulation.</b> Carnegie repeats: techniques without sincerity fail. People smell counterfeit interest.</li>
+          <li><b>"Avoid arguments" ≠ be a pushover.</b> It means change minds by questions, empathy, and evidence rather than verbal combat.</li>
+          <li><b>Praise ≠ flattery.</b> Flattery is telling people what they want to hear; appreciation is noticing what's genuinely true.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="kicker">🧪 Carnegie's Study Method (from the book itself)</span>
+        <ul class="clean">
+          <li>Develop a deep, driving <b>desire</b> to master these principles.</li>
+          <li>Read each chapter <b>twice</b>; reread the book monthly.</li>
+          <li><b>Stop often and ask</b>: how can I apply this today?</li>
+          <li>Make it a game — ask a friend to fine you when you slip.</li>
+          <li><b>Review weekly</b>: what mistakes, what improved, what lessons?</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INVESTOR ================= -->
+  <section class="panel" id="p-investor">
+    <h2 class="sec">Lessons for the Investor</h2>
+    <p class="sub">Investing is a people business — deal flow, diligence, boards, negotiations, and LPs all run on Carnegie's rails.</p>
+
+    <div class="card">
+      <table>
+        <tr><th>Investing Situation</th><th>Carnegie Principle(s)</th><th>How to Apply</th></tr>
+        <tr><td><b>Sourcing &amp; deal flow</b></td><td>#4 genuine interest · #6 names · #8 their interests</td><td>The best deal flow comes from being genuinely useful and curious first. Remember founders' names, kids, milestones. Give before you ask.</td></tr>
+        <tr><td><b>Due diligence conversations</b></td><td>#7 listen · #15 let them talk · #14 get yeses</td><td>Founders, customers, and references reveal the truth when they do 80% of the talking. Ask open questions; silence surfaces what slides never show.</td></tr>
+        <tr><td><b>Winning competitive deals</b></td><td>#3 eager want · #9 feel important · #30 happy to comply</td><td>Don't pitch your fund's features — pitch what the founder wants (speed, conviction, help with the next round). Make choosing you feel like their smart idea (#16).</td></tr>
+        <tr><td><b>Negotiating terms</b></td><td>#10 avoid arguments · #13 begin friendly · #17 their viewpoint</td><td>Hardball on a term sheet poisons a 10-year relationship. Understand what the other side truly needs; concede what's cheap to you and dear to them.</td></tr>
+        <tr><td><b>Board &amp; portfolio work</b></td><td>#22–#30 (all leadership principles)</td><td>You can't order a CEO around. Praise first, raise problems as questions ("How are you thinking about burn?"), let them save face on misses, and give them a reputation to live up to.</td></tr>
+        <tr><td><b>Delivering hard feedback</b></td><td>#12 admit faults · #24 your mistakes first · #29 encouragement</td><td>"I've backed worse pivots than this…" lands better than "this isn't working." Make the fix feel achievable or founders stop reporting the truth.</td></tr>
+        <tr><td><b>LP relations / fundraising</b></td><td>#2 appreciation · #19 nobler motives · #20 dramatize</td><td>Thank LPs sincerely and specifically. Frame the fund around their mission (endowment impact, pension security). Tell vivid portfolio stories, not just IRR tables.</td></tr>
+        <tr><td><b>When you're wrong (a loss)</b></td><td>#12 admit quickly · #11 respect opinions</td><td>Admitting a bad call fast — to LPs, partners, yourself — builds more credibility than defending it. Markets punish ego; so do partnerships.</td></tr>
+        <tr><td><b>Market views &amp; debate</b></td><td>#11 never say "you're wrong" · #18 sympathize</td><td>"I may be wrong, I frequently am — let's examine the facts" is both great Carnegie and great epistemics. Steelman the bull and bear case.</td></tr>
+        <tr><td><b>Reputation compounding</b></td><td>#1 don't criticize · #26 save face</td><td>Never trash founders, co-investors, or competitors — ecosystems are small and long-memoried. Your reputation is your highest-compounding asset.</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <span class="kicker">💰 The Meta-Lesson</span>
+      <p style="margin-top:8px">Capital is a commodity; <b>trust is not</b>. Carnegie's principles are compound-interest machines for relationships: small, sincere deposits (listening, credit-giving, face-saving) made consistently over years produce the proprietary deal flow, honest reporting, and loyal networks that actually generate alpha. The investor who makes others feel important — sincerely — gets the first call.</p>
+    </div>
+  </section>
+
+  <!-- ================= ACTIONS ================= -->
+  <section class="panel" id="p-actions">
+    <h2 class="sec">Recommendations &amp; 30-Day Action Plan</h2>
+    <p class="sub">Knowledge isn't mastery. Check items off as you practice — your progress saves on this device.</p>
+
+    <div class="card">
+      <span class="kicker">Week 1 · Foundations</span>
+      <div id="w1"></div>
+    </div>
+    <div class="card">
+      <span class="kicker">Week 2 · Likability</span>
+      <div id="w2"></div>
+    </div>
+    <div class="card">
+      <span class="kicker">Week 3 · Persuasion</span>
+      <div id="w3"></div>
+    </div>
+    <div class="card">
+      <span class="kicker">Week 4 · Leadership</span>
+      <div id="w4"></div>
+    </div>
+    <div class="card" style="text-align:center">
+      <div class="bar"><i id="actBar"></i></div>
+      <div class="progressQuiz"><span id="actCount">0</span> of <span id="actTotal">0</span> practiced</div>
+      <button class="bigbtn" style="background:var(--muted); padding:8px 18px; font-size:.8rem" onclick="resetActions()">Reset checklist</button>
+    </div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section class="panel" id="p-quiz">
+    <h2 class="sec">🎯 Mastery Quiz</h2>
+    <p class="sub">12 scenario questions. Answer all, then see your mastery level. Best score is saved on this device.</p>
+    <div class="progressQuiz">Answered: <span id="qDone">0</span>/12 · Best score: <span id="qBest">—</span></div>
+    <div id="quizArea"></div>
+    <div style="text-align:center; margin:20px 0">
+      <button class="bigbtn" id="finishBtn" onclick="finishQuiz()">Show My Score</button>
+      <button class="bigbtn" style="background:var(--accent2)" onclick="resetQuiz()">Retake Quiz</button>
+    </div>
+    <div class="card" id="scoreBox" style="display:none"></div>
+  </section>
+
+  <footer>
+    Interactive summary for personal study · Based on <em>How to Win Friends and Influence People</em> by Dale Carnegie (1936) ·
+    Built with ❤️ · Views counted via counterapi.dev (falls back to local count if offline)
+  </footer>
+</div>
+
+<script>
+/* ---------- tabs ---------- */
+const tabs=document.getElementById('tabs');
+tabs.addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b)return;
+  tabs.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('show'));
+  document.getElementById('p-'+b.dataset.t).classList.add('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+/* ---------- safe storage ---------- */
+const store={
+  get(k){try{return localStorage.getItem(k)}catch(e){return null}},
+  set(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+};
+
+/* ---------- theme ---------- */
+const themeBtn=document.getElementById('themeBtn');
+function setTheme(t){document.documentElement.setAttribute('data-theme',t);themeBtn.textContent=t==='dark'?'☀️':'🌙';store.set('hwf_theme',t);}
+setTheme(store.get('hwf_theme')||'light');
+themeBtn.onclick=()=>setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');
+
+/* ---------- views counter (counterapi.dev, graceful fallback) ---------- */
+(async function(){
+  const el=document.getElementById('viewCount');
+  try{
+    const r=await fetch('https://api.counterapi.dev/v1/faeez-hwfip-summary/pageviews/up');
+    if(!r.ok) throw 0;
+    const d=await r.json();
+    el.textContent=(d.count??d.Count??'—').toLocaleString?.()||d.count;
+  }catch(e){
+    const n=(parseInt(store.get('hwf_views')||'0',10)+1);
+    store.set('hwf_views',n); el.textContent=n+' (local)';
+  }
+})();
+
+/* ---------- action plan checklist ---------- */
+const plan={
+  w1:["Go one full day without criticizing, condemning, or complaining","Give three people specific, sincere appreciation (not flattery)","Before one request, write down what the OTHER person wants from it","Reread Part I; note one situation where you'd normally criticize — and don't"],
+  w2:["Learn and use the names of two people you'd normally not address by name","In one conversation, aim to talk less than 30% of the time","Research someone's interests before meeting them, and open with those","Smile deliberately before every call or meeting for a day","Ask someone a question about themselves and follow up twice"],
+  w3:["Catch yourself before one argument — ask a question instead","Say 'I may be wrong, let's look at the facts' in a real disagreement","Admit a mistake quickly and emphatically before anyone points it out","Structure one proposal to earn three early yeses","Let someone else take credit for an idea you planted"],
+  w4:["Open a piece of critical feedback with sincere, specific praise","Replace one direct order with a question","Praise a small improvement publicly and specifically","Give someone a fine reputation to live up to ('you're always thorough…')","Weekly review: where did I slip, what improved, what next?"]
+};
+let actState={};
+try{actState=JSON.parse(store.get('hwf_actions')||'{}')}catch(e){actState={}}
+let actTotal=0;
+for(const[w,items]of Object.entries(plan)){
+  const host=document.getElementById(w);
+  items.forEach((t,i)=>{
+    actTotal++;
+    const id=w+'_'+i;
+    const row=document.createElement('label');
+    row.style.cssText='display:flex;gap:10px;align-items:flex-start;padding:7px 0;cursor:pointer;border-bottom:1px dashed var(--line)';
+    row.innerHTML='<input type="checkbox" style="margin-top:5px" '+(actState[id]?'checked':'')+'> <span>'+t+'</span>';
+    row.querySelector('input').onchange=ev=>{actState[id]=ev.target.checked;store.set('hwf_actions',JSON.stringify(actState));updateActBar();};
+    host.appendChild(row);
+  });
+}
+document.getElementById('actTotal').textContent=actTotal;
+function updateActBar(){
+  const done=Object.values(actState).filter(Boolean).length;
+  document.getElementById('actCount').textContent=done;
+  document.getElementById('actBar').style.width=(done/actTotal*100)+'%';
+}
+updateActBar();
+function resetActions(){actState={};store.set('hwf_actions','{}');document.querySelectorAll('#p-actions input').forEach(c=>c.checked=false);updateActBar();}
+
+/* ---------- quiz ---------- */
+const QUIZ=[
+ {q:"A portfolio company's CEO just made a costly hiring mistake. Carnegie's Part I would tell you to first…",
+  o:["Point out the error clearly so it never repeats","Ask yourself what you'd have done in their position before saying anything","Send a written critique so there's a record","Stay silent forever — feedback is criticism"],a:1,
+  x:"Principle 1: don't criticize. Understanding why they acted precedes any useful conversation — criticism only triggers defensiveness (and leadership principles later show HOW to correct)."},
+ {q:"What's the difference between appreciation and flattery?",
+  o:["There is none — both make people feel good","Flattery is from the teeth out; appreciation is from the heart and specific & true","Appreciation is longer","Flattery works better on smart people"],a:1,
+  x:"Carnegie: flattery is counterfeit, 'telling the other person precisely what he thinks about himself.' Sincere, specific appreciation is the real currency."},
+ {q:"Carnegie's fishing metaphor teaches that to motivate anyone you should…",
+  o:["Offer what YOU would find valuable","Explain your needs clearly and logically","Bait the hook with what the fish wants — talk in terms of THEIR wants","Use incentives only as a last resort"],a:2,
+  x:"Principle 3: he personally loved strawberries and cream, but fish wanted worms. Arouse in the other person an eager want."},
+ {q:"You want better deal flow as an investor. The Carnegie-consistent approach is…",
+  o:["A polished pitch about your fund's advantages","Becoming genuinely interested in founders and being useful before asking anything","More frequent cold outreach","Name-dropping your best investments"],a:1,
+  x:"Principle 4: you make more friends in two months by being interested in others than in two years trying to interest them in you."},
+ {q:"According to Carnegie, the sweetest sound in any language to a person is…",
+  o:["A compliment","'You're right'","Their own name","'Thank you'"],a:2,
+  x:"Principle 6. Remembering and using names — correctly — is a subtle, powerful compliment; forgetting them is a subtle slight."},
+ {q:"In a reference call during due diligence, the Carnegie move is to…",
+  o:["Run through your checklist efficiently","Ask open questions and let them do most of the talking","Share your own thesis first so they can react","Keep calls short out of respect"],a:1,
+  x:"Principles 7 & 15: be a good listener and let the other person do the talking. People reveal the truth when given room and genuine attention."},
+ {q:"Carnegie says the ONLY way to get the best of an argument is to…",
+  o:["Prepare better data","Stay calm and rebut point by point","Avoid it","Bring a neutral third party"],a:2,
+  x:"Principle 10. Even if you win, you lose — the other person feels inferior, resents you, and remains unconvinced."},
+ {q:"You're sure a founder's market-size claim is wrong. Carnegie suggests opening with…",
+  o:["'You're wrong, and here's why'","'I may be wrong, I frequently am — let's examine the numbers together'","'Interesting…' then changing the subject","Silence; put it in the board memo instead"],a:1,
+  x:"Principle 11: never say 'you're wrong.' Respect for their opinion plus shared fact-finding changes minds; blunt contradiction entrenches them."},
+ {q:"You made a bad investment call. The Carnegie (and credibility-maximizing) move is…",
+  o:["Explain the external factors that caused it","Admit it quickly and emphatically","Wait to see if it recovers before commenting","Minimize it in the LP letter"],a:1,
+  x:"Principle 12: say about yourself what others are thinking before they can. Fast, full admission disarms critics and builds trust."},
+ {q:"To change a CEO's behavior without resentment, a board member should…",
+  o:["Give direct orders — clarity is kindness","Begin with sincere praise, then raise the issue as a question","Compare them to a better-performing CEO","Save all feedback for the annual review"],a:1,
+  x:"Principles 22 & 25: begin with honest appreciation and ask questions instead of giving orders. Pride intact = change possible."},
+ {q:"An analyst's model had a big error. 'Make the fault seem easy to correct' means…",
+  o:["Downplay it so they don't feel bad, even dishonestly","Frame the gap as small and fixable, and express confidence in their latent ability","Fix it yourself quietly","Assign them easier work"],a:1,
+  x:"Principle 29: encouragement. Tell people a fault is easily corrected and they'll practice till dawn; call them hopeless and they quit trying."},
+ {q:"'Give the other person a fine reputation to live up to' works because…",
+  o:["People fear losing status","People tend to act consistently with the identity you sincerely assign them","It's a form of social pressure","It creates debt they must repay"],a:1,
+  x:"Principle 28: assume the virtue openly — 'you've always been scrupulously honest' — and most people will strive to live up to the label."}
+];
+const quizArea=document.getElementById('quizArea');
+let answers=new Array(QUIZ.length).fill(null);
+function buildQuiz(){
+  quizArea.innerHTML='';
+  answers=new Array(QUIZ.length).fill(null);
+  QUIZ.forEach((item,qi)=>{
+    const d=document.createElement('div');d.className='q';
+    d.innerHTML='<h4>Q'+(qi+1)+'. '+item.q+'</h4>';
+    item.o.forEach((opt,oi)=>{
+      const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+oi)+'. '+opt;
+      b.onclick=()=>{
+        if(answers[qi]!==null)return;
+        answers[qi]=oi;
+        d.classList.add('answered');
+        d.querySelectorAll('.opt').forEach((x,xi)=>{
+          x.disabled=true;
+          if(xi===item.a)x.classList.add('correct');
+          else if(xi===oi)x.classList.add('wrong');
+        });
+        document.getElementById('qDone').textContent=answers.filter(x=>x!==null).length;
+      };
+      d.appendChild(b);
+    });
+    const ex=document.createElement('div');ex.className='explain';ex.innerHTML='💡 '+item.x;
+    d.appendChild(ex);
+    quizArea.appendChild(d);
+  });
+  document.getElementById('qDone').textContent='0';
+  document.getElementById('scoreBox').style.display='none';
+}
+function finishQuiz(){
+  const done=answers.filter(x=>x!==null).length;
+  if(done<QUIZ.length){alert('You still have '+(QUIZ.length-done)+' unanswered question(s)!');return;}
+  const score=answers.reduce((s,a,i)=>s+(a===QUIZ[i].a?1:0),0);
+  const pct=Math.round(score/QUIZ.length*100);
+  let badge,msg;
+  if(pct===100){badge='🏆 Carnegie Master';msg='Flawless. Now the hard part: live it for 30 days.';}
+  else if(pct>=80){badge='🥇 Influence Pro';msg='Excellent grasp. Review the ones you missed and hit the Action Plan.';}
+  else if(pct>=60){badge='🥈 Rising Diplomat';msg='Solid foundation. Reread the Principles tab — especially Parts III & IV.';}
+  else{badge='📖 Apprentice';msg='The concepts haven\'t stuck yet — revisit Key Takeaways, then retake.';}
+  const box=document.getElementById('scoreBox');
+  box.style.display='block';
+  box.innerHTML='<div class="kicker">Your Mastery Score</div><div class="big">'+score+' / '+QUIZ.length+'</div>'+
+    '<div class="bar"><i id="scoreBar"></i></div><div class="badge">'+badge+'</div><p style="margin-top:10px;color:var(--muted)">'+msg+'</p>';
+  setTimeout(()=>{document.getElementById('scoreBar').style.width=pct+'%'},50);
+  const best=parseInt(store.get('hwf_best')||'0',10);
+  if(score>best)store.set('hwf_best',score);
+  document.getElementById('qBest').textContent=Math.max(best,score)+'/'+QUIZ.length;
+  box.scrollIntoView({behavior:'smooth'});
+}
+function resetQuiz(){buildQuiz();window.scrollTo({top:0,behavior:'smooth'});}
+buildQuiz();
+const b0=store.get('hwf_best');if(b0)document.getElementById('qBest').textContent=b0+'/'+QUIZ.length;
+</script>
+</body>
+</html>
